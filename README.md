@@ -1,34 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Задание
 
-## Getting Started
+Необходимо сделать web-интерфейс к API для получения информации о штрафах по УИН. Для работы использовать [Next.js](https://nextjs.org/) и React hooks. TypeScript и Docker приветствуются.
 
-First, run the development server:
+## Интерфейс
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Набросок интерфейса лежит в [figma](https://www.figma.com/file/gZj7xCZtSs6XuJUgRrfxs2/Untitled?node-id=0%3A1)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Пользователю должно быть доступно поле для ввода УИН штрафа и кнопка "найти", после нажатия на которую будет выполнен API запрос и отображен ответ.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+УИН номера имеют длину 20 или 25 цифр и имеют проверочный символ в конце. Необходимо расчитывать этот символ на основе введенных цифр и подсказывать его пользователю. Также можно предупреждать о том, что количество введенных символов не совпадает с необходимым. Но не стоит мешать пользователю, если он целенаправленно пытается ошибиться :)
+Правила расчета проверочного символа можно найти в [каком то документе про ГИС ГИМ](https://www.roskazna.ru/upload/iblock/e9f/formaty-gis-gmp_versii_2-0_v1_20171211.docx) в 5.1.3
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## API
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Для поиска штрафов используется HTTP API сервера. Сервер принимает HTTP GET запросы вида http://<ip:port>/fines/<уин>. Если штраф найден, сервер устанавливает статус ответа 200 и отвечает описанием штрафа в формате JSON. Если штраф не найден, код ответа - 404. Если во время поиска произошла ошибка, код ответа - 500. Доступные поля JSON объекта можно посмотреть, поотправляя запросы на mock сервер.
 
-## Learn More
+Для тестирования поднят mock сервер по адресу https://test-task.shtrafovnet.com/
+Он умеет находить два штрафа: https://test-task.shtrafovnet.com/fines/0356043010119111100023005 и https://test-task.shtrafovnet.com/fines/18810136191111001035 .
+На запросы вида /fines/188* он отвечает статусом 404, на остальные /fines/* - статусом 500.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+У mock сервера доступна консоль: https://logs.test-task.shtrafovnet.com/, там логгируются все запросы.
