@@ -1,0 +1,42 @@
+@import "../../styles/_extend.scss";
+
+.form {
+    &__label {
+        @extend %default-font;
+    }
+    &__control {
+        position: relative;
+        display: flex;
+        margin: 2.4rem 0;
+    }
+    &__input {
+        flex: 1 1 40.3rem;
+        height: 3.5rem;
+        background: #fdfdfd;
+        border: 1px solid #979797;
+        padding: 0.7rem 0.8rem;
+        @extend %default-font;
+
+        &::placeholder {
+            color: #969595;
+        }
+    }
+    &__button {
+        flex: 1 1 11.7rem;
+        height: 3.5rem;
+        margin-left: 1.1rem;
+        background: #63c556;
+        color: #ffffff;
+        @extend %default-font;
+    }
+    &__tooltip {
+        position: absolute;
+        top: 4rem;
+        left: 0;
+        width: auto;
+        background: #ffffff;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+        padding: 0.3rem 0.6rem;
+        @extend %default-font;
+    }
+}

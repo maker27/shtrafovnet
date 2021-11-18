@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    &__logo {
+        margin-right: 1rem;
+    }
+    &__label {
+        font: 2rem/2.5rem "GT Walsheim Pro", sans-serif;
+        text-transform: uppercase;
+
+        &_bold {
+            font-weight: 900;
+        }
+    }
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.4rem;
+    height: 3.4rem;
+    background: #63c556;
+    border-radius: 0.4rem;
+}
