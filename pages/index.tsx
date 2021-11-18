@@ -13,7 +13,6 @@ const Home: NextPage = () => {
             <Head>
                 <title>Информация о штрафах</title>
                 <meta name="description" content="Получение информации о штрафах по УИН" />
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Header />

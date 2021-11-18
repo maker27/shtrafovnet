@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import React from 'react';
 
 class AppDocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
@@ -9,7 +10,9 @@ class AppDocument extends Document {
     render() {
         return (
             <Html lang="ru">
-                <Head />
+                <Head>
+                    <link rel="icon" href="/favicon.svg" />
+                </Head>
                 <body>
                     <Main />
                     <NextScript />
