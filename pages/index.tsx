@@ -1,35 +1,27 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../styles/Home.module.scss';
-import Loader from '../components/Loader';
-import NotFound from '../components/NotFound';
-import FineInfo from '../components/FineInfo';
-import Header from '../components/Header';
+import React, { useEffect, useState } from 'react';
+
 import SearchForm from '../components/SearchForm';
+import PageLayout from '../components/PageLayout';
+import SearchResult, { SearchResultValue } from '../components/SearchResult';
 
-const Home: NextPage = () => {
-    return (
-        <div className={styles.container}>
-            <Head>
-                <title>Информация о штрафах</title>
-                <meta name="description" content="Получение информации о штрафах по УИН" />
-            </Head>
-
-            <Header />
-
-            <main className={styles.main}>
-                <SearchForm />
-            </main>
-
-            <div className={styles.result}>
-                <Loader size="1rem" />
-
-                <NotFound uin="0355431010119102401042373" />
-            </div>
-
-            <FineInfo />
-        </div>
+export default function Home() {
+    const [searchResult, setSearchResult] = useState<SearchResultValue>(
+        SearchResultValue.initial
     );
-};
 
-export default Home;
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setSearchResult(lastSearchResult =>
+                lastSearchResult >= 3 ? 0 : lastSearchResult + 1
+            );
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <PageLayout title="Информация о штрафах">
+            <SearchForm />
+            <SearchResult result={searchResult} />
+        </PageLayout>
+    );
+}

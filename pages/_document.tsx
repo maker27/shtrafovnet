@@ -1,4 +1,10 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import Document, {
+    Html,
+    Head,
+    Main,
+    NextScript,
+    DocumentContext
+} from 'next/document';
 import React from 'react';
 
 class AppDocument extends Document {
@@ -12,6 +18,10 @@ class AppDocument extends Document {
             <Html lang="ru">
                 <Head>
                     <link rel="icon" href="/favicon.svg" />
+                    <meta
+                        name="description"
+                        content="Получение информации о штрафах по УИН"
+                    />
                 </Head>
                 <body>
                     <Main />
