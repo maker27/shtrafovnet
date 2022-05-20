@@ -1,22 +1,16 @@
+import { useCallback } from 'react';
+
 import styles from './SearchForm.module.scss';
-import { fineIds } from '../../assets/fines';
-import { ChangeEvent, useCallback, useState } from 'react';
 import { Uin } from '../../assets/types';
 import TextInput from '../TextInput';
+import useUin from '../../hooks/useUin';
 
 interface SearchFormProps {
     onSearch: (fineId: Uin) => void;
 }
 
 export default function SearchForm({ onSearch }: SearchFormProps) {
-    const [uin, setUin] = useState(fineIds[0]);
-
-    const onChange = useCallback(
-        ({ target }: ChangeEvent<HTMLInputElement>) => {
-            setUin(target.value);
-        },
-        []
-    );
+    const { uin, onChange, hint } = useUin();
 
     const onSubmit = useCallback(() => {
         onSearch(uin);
@@ -40,8 +34,10 @@ export default function SearchForm({ onSearch }: SearchFormProps) {
                 <button className={styles.form__button} onClick={onSubmit}>
                     Найти
                 </button>
-                <div className={styles.form__tooltip}>
-                    0355431010119102401042373
+                <div
+                    className={styles.form__tooltip}
+                    style={{ display: hint.length ? 'block' : 'none' }}>
+                    {hint}
                 </div>
             </div>
         </div>
