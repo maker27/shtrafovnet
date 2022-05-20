@@ -1,5 +1,7 @@
+export type Uin = string;
+
 export interface Fine {
-    number: string;
+    number: Uin;
     bill_at: Date;
     amount: string;
     amount_to_pay: string;

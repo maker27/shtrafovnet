@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import SearchForm from '../components/SearchForm';
 import PageLayout from '../components/PageLayout';
 import SearchResult from '../components/SearchResult';
-import { Fine, SearchResultValue } from '../assets/types';
+import { Fine, SearchResultValue, Uin } from '../assets/types';
 import FineApi from '../services/fineApi';
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
     );
     const [fine, setFine] = useState<Fine>();
 
-    const onSearch = useCallback((fineId: Fine['number']) => {
+    const onSearch = useCallback((fineId: Uin) => {
         setSearchResult(SearchResultValue.pending);
         FineApi.get(fineId)
             .then(fine => {

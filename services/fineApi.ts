@@ -1,7 +1,7 @@
-import { Fine } from '../assets/types';
+import { Fine, Uin } from '../assets/types';
 
 class FineApi {
-    async get(id: Fine['number']) {
+    async get(id: Uin) {
         const response = await fetch(`/fines/${id}`);
         const fine: Fine = await response.json();
         return fine;

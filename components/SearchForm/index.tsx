@@ -1,11 +1,11 @@
 import styles from './SearchForm.module.scss';
 import { fineIds } from '../../assets/fines';
-import { Fine } from '../../assets/types';
 import { ChangeEvent, useCallback, useState } from 'react';
+import { Uin } from '../../assets/types';
 import TextInput from '../TextInput';
 
 interface SearchFormProps {
-    onSearch: (fineId: Fine['number']) => void;
+    onSearch: (fineId: Uin) => void;
 }
 
 export default function SearchForm({ onSearch }: SearchFormProps) {
