@@ -33,6 +33,7 @@ export default function SearchForm({ onSearch }: SearchFormProps) {
                     className={styles.form__input}
                     id="uin-input"
                     placeholder="Введите УИН"
+                    autoComplete={false}
                     onEnter={onSubmit}
                     onChange={onChange}
                 />

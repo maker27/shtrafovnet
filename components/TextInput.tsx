@@ -5,6 +5,7 @@ interface TextInputProps {
     className?: string;
     id?: string;
     placeholder?: string;
+    autoComplete?: boolean;
     onEnter: () => void;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -14,6 +15,7 @@ const TextInput: FC<TextInputProps> = ({
     className,
     id,
     placeholder,
+    autoComplete = true,
     onEnter,
     onChange
 }) => {
@@ -32,6 +34,7 @@ const TextInput: FC<TextInputProps> = ({
             type="text"
             className={className}
             placeholder={placeholder}
+            autoComplete={autoComplete ? '' : 'off'}
             onChange={onChange}
             onKeyPress={handleKeyPress}
             value={value}
