@@ -10,7 +10,8 @@
         margin: 2.4rem 0;
     }
     &__input {
-        flex: 1 1 40.3rem;
+        flex: 0 1 40.3rem;
+        min-width: 10rem;
         height: 3.5rem;
         background: #fdfdfd;
         border: 1px solid #979797;
@@ -22,7 +23,7 @@
         }
     }
     &__button {
-        flex: 1 1 11.7rem;
+        flex: 0 0 11.7rem;
         height: 3.5rem;
         margin-left: 1.1rem;
         background: #63c556;
