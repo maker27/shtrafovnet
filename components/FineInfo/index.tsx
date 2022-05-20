@@ -1,48 +1,52 @@
 import styles from './FineInfo.module.scss';
+import { Fine } from '../../assets/types';
 
-const paragraphs = [
-    'Свидетельство о регистрации',
-    'Дата постановления',
-    'Нарушение',
-    'Получатель платежа',
-    'ИНН',
-    'КПП',
-    'Расчетный счет',
-    'Банк получателя',
-    'БИК',
-    'ОКТМО(ОКАТО)',
-    'КБК',
-    'Сумма штрафа',
-    'Скидка',
-    'К оплате'
-];
+type FineOption = keyof Fine;
 
-const values = [
-    '3620848239',
-    '2019-11-11',
-    '12.9ч.2',
-    'УФК по Воронежской области (ГУ МВД России по Воронежской области, л/с 04311294650)',
-    '3666026374',
-    '366601001',
-    '40101810500000010004',
-    'отделение Воронеж г. Воронеж',
-    '042007001',
-    '20701000',
-    '18811630020016000140',
-    '500',
-    'активна до 2019-12-02',
-    '250'
-];
+const paragraphs: { [key in FineOption]?: string } = {
+    doc_number: 'Свидетельство о регистрации',
+    bill_at: 'Дата постановления',
+    koap_code: 'Нарушение',
+    payee_username: 'Получатель платежа',
+    payee_inn: 'ИНН',
+    payee_kpp: 'КПП',
+    payee_bank_account: 'Расчетный счет',
+    payee_bank_name: 'Банк получателя',
+    payee_bank_bik: 'БИК',
+    payee_oktmo: 'ОКТМО(ОКАТО)',
+    kbk: 'КБК',
+    amount: 'Сумма штрафа',
+    discount_at: 'Скидка',
+    amount_to_pay: 'К оплате'
+};
 
-export default function FineInfo() {
+interface FineInfoProps {
+    fine?: Fine;
+}
+
+export default function FineInfo({ fine }: FineInfoProps) {
+    if (!fine) return null;
+
+    const formatParagraphs = (item: FineOption) => {
+        const value = fine[item] || '';
+        if (item === 'discount_at') {
+            return value ? `активна до ${value}` : '-';
+        }
+        return value;
+    };
+
     return (
         <div className={styles.fine}>
-            <div className={styles.fine__caption}>Постановление #18810136191111001035</div>
+            <div className={styles.fine__caption}>
+                Постановление #{fine.number}
+            </div>
             <div className={styles.fine__table + ' ' + styles.table}>
-                {paragraphs.map((item, index) => (
+                {Object.entries(paragraphs).map(([item, value]) => (
                     <div key={item} className={styles.table__row}>
-                        <div className={styles.table__column1}>{item}:</div>
-                        <div className={styles.table__column2}>{values[index]}</div>
+                        <div className={styles.table__column1}>{value}:</div>
+                        <div className={styles.table__column2}>
+                            {formatParagraphs(item as FineOption)}
+                        </div>
                     </div>
                 ))}
             </div>
