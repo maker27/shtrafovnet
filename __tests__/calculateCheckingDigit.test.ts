@@ -1,5 +1,5 @@
 import calculateCheckingDigit from '../helpers/calculateCheckingDigit';
-import { fineIds } from '../assets/fines';
+import { fineIds } from './mocks/fineIds';
 
 describe('checks last digit', () => {
     const [uin1, uin2] = fineIds;
